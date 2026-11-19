@@ -4,156 +4,72 @@ import 'demo_auth.dart';
 import 'login_screen.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final String username;
+
+  const ProfilePage({super.key, required this.username});
+
+  void logout(BuildContext context) {
+    DemoAuth.logout();
+
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 235, 231, 228),
-      appBar: AppBar(
-        title: const Text('Student Profile'),
-        centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 94, 218, 176),
-        foregroundColor: Color.fromARGB(255, 73, 64, 64),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
+      appBar: AppBar(title: const Text('Student Profile')),
+      body: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          const CircleAvatar(
+            radius: 50,
+            backgroundColor: Colors.indigo,
+            child: Icon(Icons.person, size: 60, color: Colors.white),
+          ),
+          const SizedBox(height: 16),
+
+          const Text(
+            'YOUR FULL NAME',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+
+          Text('Logged in as: $username', textAlign: TextAlign.center),
+          const SizedBox(height: 24),
+
+          const Card(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Profile avatar.
-                const Center(
-                  child: CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Color.fromARGB(255, 94, 218, 176),
-                    child: Text(
-                      'JEM',
-                      style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 73, 64, 64),
-                      ),
-                    ),
-                  ),
+                ListTile(
+                  leading: Icon(Icons.badge),
+                  title: Text('Student ID'),
+                  subtitle: Text('YOUR STUDENT ID'),
                 ),
-
-                const SizedBox(height: 16),
-
-                // Student name and course.
-                const Text(
-                  'John Erold Miano',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 73, 64, 64),
-                  ),
+                ListTile(
+                  leading: Icon(Icons.school),
+                  title: Text('Course and Section'),
+                  subtitle: Text('YOUR COURSE AND SECTION'),
                 ),
-
-                const SizedBox(height: 8),
-
-                const Text(
-                  'BS Computer Science',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Colors.black54),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Student details.
-                const Card(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: Icon(
-                          Icons.badge,
-                          color: Color.fromARGB(255, 94, 218, 176),
-                        ),
-                        title: Text('Student Number'),
-                        subtitle: Text('542566'),
-                      ),
-                      Divider(height: 1),
-                      ListTile(
-                        leading: Icon(
-                          Icons.school,
-                          color: Color.fromARGB(255, 94, 218, 176),
-                        ),
-                        title: Text('Year Level and Section'),
-                        subtitle: Text('3rd Year - CCE106 (3450)'),
-                      ),
-                      Divider(height: 1),
-                      ListTile(
-                        leading: Icon(
-                          Icons.email,
-                          color: Color.fromARGB(255, 94, 218, 176),
-                        ),
-                        title: Text('Email Address'),
-                        subtitle: Text('j.miano.542566@umindanao.edu.ph'),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Introduction.
-                const Text(
-                  'About Me',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-
-                const SizedBox(height: 8),
-
-                const Text(
-                  'I am a CS student who enjoys learning '
-                  'about technology, creating, networking. '
-                  'My goal is to become a Cloud Engineer.'
-                  'Starting from being a Network Engineer. ',
-                  style: TextStyle(fontSize: 16, height: 1.5),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Hobbies.
-                const Text(
-                  'Hobbies and Interests',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-
-                const SizedBox(height: 8),
-
-                const Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    Chip(label: Text('Coding')),
-                    Chip(label: Text('Gaming')),
-                    Chip(label: Text('Chiikawa')),
-                    Chip(label: Text('Spontaneous Activities')),
-                  ],
-                ),
-
-                const SizedBox(height: 24),
-
-                ElevatedButton.icon(
-                  onPressed: () {
-                    DemoAuth.logout();
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
-                      ),
-                      (route) => false,
-                    );
-                  },
-                  icon: const Icon(Icons.logout),
-                  label: const Text('Logout'),
+                ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text('Email'),
+                  subtitle: Text('student@example.com'),
                 ),
               ],
             ),
           ),
-        ),
+          const SizedBox(height: 24),
+
+          ElevatedButton.icon(
+            onPressed: () => logout(context),
+            icon: const Icon(Icons.logout),
+            label: const Text('Logout'),
+          ),
+        ],
       ),
     );
   }
