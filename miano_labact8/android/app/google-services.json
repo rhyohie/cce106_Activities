@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "394609517407",
+    "project_id": "miano-student-app",
+    "storage_bucket": "miano-student-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394609517407:android:50175c477bc446ef39ccea",
+        "android_client_info": {
+          "package_name": "com.example.miano_navigation_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZac6RgYXZFixksxGlaqbssKymSUo9UJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
