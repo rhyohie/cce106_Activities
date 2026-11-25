@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+
+import 'student_crud_page.dart';
+
+class DashboardPage extends StatelessWidget {
+  final String username;
+
+  const DashboardPage({super.key, required this.username});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Dashboard')),
+      body: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          Icon(Icons.dashboard, size: 80, color: Colors.indigo),
+          SizedBox(height: 20),
+
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const StudentCrudPage(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.storage),
+            label: const Text('Manage Student Records'),
+          ),
+
+          SizedBox(height: 16),
+
+          Text(
+            'Welcome, $username!',
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 12),
+
+          Text(
+            'Explore your student application using '
+            'the navigation bar below.',
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 24),
+
+          const Card(
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.calculate),
+                  title: Text('Calculator'),
+                  subtitle: Text('Perform basic arithmetic operations.'),
+                ),
+                Divider(height: 1),
+
+                ListTile(
+                  leading: Icon(Icons.people),
+                  title: Text('Social'),
+                  subtitle: Text('Create posts, like posts, and add comments.'),
+                ),
+                Divider(height: 1),
+
+                ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text('Profile'),
+                  subtitle: Text('View student information and log out.'),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
